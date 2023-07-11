@@ -10,7 +10,7 @@ public class UserLoginPage {
 	int chances = 1;
 	Scanner sc = new Scanner(System.in);
 
-	void checkingLoginIdAndPassword() {
+	void checkLoginIdAndPassword() {
 		while (chances <= 3) {
 		
 			System.out.println("Enter your login id: ");
