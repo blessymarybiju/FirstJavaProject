@@ -2,20 +2,24 @@ package waterTank;
 
 public class WaterTankCapacity {
 
-	double capacity;
-	double bucket;
+	double initialWaterLevel;
+	double bucketCapacity;
 	double totalCapacity;
+	//maximum capacity of tank
 	double maxCapacity;
+	//maximum tank capacity to hold water
 
 	void fillTheTank() {
-		while (capacity <= totalCapacity) {
-			if (capacity <= maxCapacity) {
-				System.out.println("Current water level in the tank(in liters) : " + capacity);
-				capacity += bucket;
-			} else {
-				System.out.println("Maximum capacity of tank is "+maxCapacity+" liters(out of "+ totalCapacity+"). Tank is almost Full!!! ");
-				break;
-			}
+		while (initialWaterLevel <= totalCapacity) {
+			if (initialWaterLevel <= maxCapacity) {
+				System.out.println("Current water level in the tank(in liters) : " + initialWaterLevel);
+				if(initialWaterLevel>=maxCapacity || ((initialWaterLevel+bucketCapacity)>maxCapacity))
+				{
+					System.out.println("Maximum capacity of tank is "+maxCapacity+" liters(out of "+ totalCapacity+"). Can't add "+bucketCapacity+" liters. Tank is almost Full!!! ");
+					break;
+				}
+				initialWaterLevel += bucketCapacity;
+			} 
 		}
 
 	}
