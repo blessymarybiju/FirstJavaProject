@@ -27,21 +27,16 @@ public class Books {
 
 	// Novel
 	Book prideAndPrejudice = new Book(24, " Jane_Austen", "Pride_And_Prejudice", 1, BookType.NOVEL);
-	Book theRedAndTheBlack = new Book(25, "Stendhal", "The_Red_and_the_Black ", 1, BookType.NOVEL);
+	Book theRedAndTheBlack = new Book(25, "Stendhal", "The_Red_and_the_Black", 1, BookType.NOVEL);
 
 	Book theBooks[] = { theShining, anneOfGreenGables, harryPotter, famousFive, lordOfTheRings, throughTheLookingGlass,
 			gulliversTravels, robinsonCrusoe, aroundTheWorldInEightyDays, goneGirl, theGirlOnTheTrain, theGuestList,
 			theSilentPatient, prideAndPrejudice, theRedAndTheBlack };
 	Scanner sc = new Scanner(System.in);
-	String choice;
-	int maximumBookCanBeBorrowed = 0;
 
-	void searchBook() {
-		System.out.println(
-				"Enter the type of book you like to borrrow: \n 1.Famous \n 2.Fiction \n 3.Thriller \n 4.Kids \n 5.Novel \n");
-		String type = sc.next();
-		int choice = 0;
+	String searchBook(String type) {
 
+		var count = 0;
 		for (int i = 0; i < theBooks.length; i++) {
 			if (theBooks[i].typeOFBook.getTypeOfBook().equalsIgnoreCase(type)) {
 				System.out.println("Serial number: " + theBooks[i].serialNo);
@@ -49,12 +44,32 @@ public class Books {
 				System.out.println("Author Name: " + theBooks[i].authorName);
 				System.out.println("Available Quantity: " + theBooks[i].bookQty);
 				System.out.println("\n");
-				choice = 1;
+				count = 1;
 			}
 		}
-		if (choice == 0) {
+		if (count == 0) {
 			System.out.println("Please enter a valid type!!!");
 		}
+		return null;
+	}
+
+	// searchBook method using book name and author name
+	String searchBook(String bookName, String authorName) {
+		var count = 0;
+		for (int i = 0; i < theBooks.length; i++) {
+			if (theBooks[i].bookName.equals(bookName) && theBooks[i].authorName.equals(authorName)) {
+				System.out.println("Serial number: " + theBooks[i].serialNo);
+				System.out.println("Book Name: " + theBooks[i].bookName);
+				System.out.println("Author Name: " + theBooks[i].authorName);
+				System.out.println("Available Quantity: " + theBooks[i].bookQty);
+				System.out.println("\n");
+				count = 1;
+			}
+		}
+		if (count == 0) {
+			System.out.println("Please search for an available book in library!!!");
+		}
+		return null;
 	}
 
 	void showAllBooks() {
@@ -69,42 +84,30 @@ public class Books {
 	}
 
 	void displayMenu() {
-		System.out.println("\nEnter 1 to Search a Book.");
-		System.out.println("Enter 2 to Show All Books.");
-		System.out.println("Enter 3 to Show All Registered Students.");
-		System.out.println("Enter 4 to Borrow Book");
-		System.out.println("Enter 0 to Exit Application.");
+		System.out.println("\nEnter 1 to Search a Book");
+		System.out.println("Enter 2 to Search by author and book name");
+		System.out.println("Enter 3 to Show All Books");
+		System.out.println("Enter 4 to Show All Registered Students");
+		System.out.println("Enter 5 to Borrow Book");
+		System.out.println("Enter 0 to Exit Application");
 	}
 
-	void borrowBook() {
-		int count = 0;
-		do {
-			if (maximumBookCanBeBorrowed < 3) {
-				System.out.println("Enter the name of the book you want to borrow:");
-				String bookName = sc.next();
-				for (int i = 0; i < theBooks.length; i++) {
-					if (theBooks[i].bookName.equals(bookName)) {
-						if (theBooks[i].bookQty < theBooks[i].bookQtyCopy) {
-							System.out.println("You can't borrow same book again!");
-							break;
-						}
-						theBooks[i].bookQty--;
-						count++;
-						System.out.println("Book added for checkout");
-						maximumBookCanBeBorrowed++;
-
-						break;
-					}
+	int borrowBook(String bookName) {
+		var count = 0;
+		for (int i = 0; i < theBooks.length; i++) {
+			if (theBooks[i].bookName.equals(bookName)) {
+				if (theBooks[i].bookQty < theBooks[i].bookQtyCopy) {
+					return -1;
 				}
-				if (count == 0) {
-					System.out.println("Please enter a book available in library!!!");
-				}
-			} else {
-				System.out.println("You can't borrow more than 3 book.");
-				break;
+				theBooks[i].bookQty--;
+				count++;
+				System.out.println("Book added for checkout");
+				return 1;
 			}
-			System.out.println("Do you want to borrow more book( please enter y for yes, n for no)");
-			choice = sc.next();
-		} while (choice.equals("y"));
+		}
+		if (count == 0) {
+			System.out.println("Please enter a book available in library!!!");
+		}
+		return 0;
 	}
 }

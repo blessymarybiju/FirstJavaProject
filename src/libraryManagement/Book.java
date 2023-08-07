@@ -9,31 +9,29 @@ public class Book {
 	public int bookQtyCopy;
 	BookType typeOFBook;
 
-	public Book(int sNo, String nameOfAuthor, String nameOfBook, int quantityOfBook, BookType type) {
-		serialNo = sNo;
-		authorName = nameOfAuthor;
-		bookName = nameOfBook;
-		bookQty = quantityOfBook;
-		bookQtyCopy = quantityOfBook;
-		typeOFBook=type;
+	public Book(int serialNo, String authorName, String bookName, int bookQty, BookType typeOFBook) {
+		this.serialNo = serialNo;
+		this.authorName = authorName;
+		this.bookName = bookName;
+		this.bookQty = bookQty;
+		this.bookQtyCopy = bookQty;
+		this.typeOFBook = typeOFBook;
 	}
 
-	public enum BookType
-	{
-		FAMOUS("Famous"),
-		FICTION("Fiction"),
-		KIDS("Kids"),
-		THRILLER("Thriller"),
+	public enum BookType {
+		FAMOUS("Famous"), 
+		FICTION("Fiction"), 
+		KIDS("Kids"), 
+		THRILLER("Thriller"), 
 		NOVEL("Novel");
-		
+
 		String nameOfBookType;
-		
-		BookType(String typeOfTheBook)
-		{
-			nameOfBookType=typeOfTheBook;
+
+		BookType(String typeOfTheBook) {
+			nameOfBookType = typeOfTheBook;
 		}
-		String getTypeOfBook()
-		{
+
+		String getTypeOfBook() {
 			return nameOfBookType;
 		}
 	}

@@ -4,9 +4,11 @@ public class Student {
 
 	String studentName;
 	String registerNumber;
+	String password;
 
-	public Student(String sName, String regNum) {
-		studentName = sName;
-		registerNumber = regNum;
+	Student(String studentName, String registerNumber, String password) {
+		this.studentName = studentName;
+		this.registerNumber = registerNumber;
+		this.password = password;
 	}
 }
