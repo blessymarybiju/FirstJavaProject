@@ -34,7 +34,8 @@ public class Books {
 			theSilentPatient, prideAndPrejudice, theRedAndTheBlack };
 	Scanner sc = new Scanner(System.in);
 
-	String searchBook(String type) {
+	// searchBook method using genre
+	public void searchBook(String type) {
 
 		var count = 0;
 		for (int i = 0; i < theBooks.length; i++) {
@@ -50,11 +51,10 @@ public class Books {
 		if (count == 0) {
 			System.out.println("Please enter a valid type!!!");
 		}
-		return null;
 	}
 
 	// searchBook method using book name and author name
-	String searchBook(String bookName, String authorName) {
+	public String searchBook(String bookName, String authorName) {
 		var count = 0;
 		for (int i = 0; i < theBooks.length; i++) {
 			if (theBooks[i].bookName.equals(bookName) && theBooks[i].authorName.equals(authorName)) {
@@ -72,7 +72,8 @@ public class Books {
 		return null;
 	}
 
-	void showAllBooks() {
+	// Method to view all books available in library
+	public void showAllBooks() {
 		for (int i = 0; i < theBooks.length; i++) {
 			System.out.println("Serial number: " + theBooks[i].serialNo);
 			System.out.println("Book Name: " + theBooks[i].bookName);
@@ -83,16 +84,19 @@ public class Books {
 		}
 	}
 
-	void displayMenu() {
-		System.out.println("\nEnter 1 to Search a Book");
+	// Method to display the menu of library application
+	public void displayMenu() {
+		System.out.println("\nEnter 1 to Search all the Book of a particular genre");
 		System.out.println("Enter 2 to Search by author and book name");
 		System.out.println("Enter 3 to Show All Books");
 		System.out.println("Enter 4 to Show All Registered Students");
 		System.out.println("Enter 5 to Borrow Book");
+		System.out.println("Enter 6 to logout from the application");
 		System.out.println("Enter 0 to Exit Application");
 	}
 
-	int borrowBook(String bookName) {
+	// Method to borrow books in the library
+	public int borrowBook(String bookName) {
 		var count = 0;
 		for (int i = 0; i < theBooks.length; i++) {
 			if (theBooks[i].bookName.equals(bookName)) {
