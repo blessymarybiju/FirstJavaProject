@@ -7,6 +7,9 @@ public class HotelDetails {
 	HotelStay hotel;
 
 	public void displayStayDetails() {
+		System.out.println(
+				"-------------------------------------------------------------------------------------------------\n\n");
+		System.out.println("Welcome to Hotel Booking\n");
 		System.out.println("Please enter the room you want to select\r\n"
 				+ "Delux Suite: accommodates 2 adults and 2 children at the rate of $180/ night\r\n"
 				+ "Family Suite: accommodates 4 adults and 4 children at $230/ night");
@@ -31,6 +34,6 @@ public class HotelDetails {
 		int numOfAdult = sc.nextInt();
 		System.out.println("Enter the number of children: ");
 		int numOfKid = sc.nextInt();
-		hotel.calculateTotal(numOfAdult,numOfKid);
+		hotel.calculateTotal(numOfAdult, numOfKid);
 	}
 }

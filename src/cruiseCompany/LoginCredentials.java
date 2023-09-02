@@ -1,13 +1,15 @@
 package cruiseCompany;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginCredentials {
 	Scanner sc = new Scanner(System.in);
-	UserProfile[] userProfile1 = new UserProfile[10];
-	UserProfile[] loggedInAccount = new UserProfile[1];
 	private boolean isValid = false;
 	public static int count = 0;
+	UserProfile[] loggedInAccount = new UserProfile[1];
+	UserProfile[] userProfile1 = new UserProfile[10];
 
 	public boolean signUpApplication() {
 		System.out.println(
@@ -25,15 +27,38 @@ public class LoginCredentials {
 			System.out.println("REGISTRATION PAGE");
 			System.out.println("Enter your user name ");
 			var userName = sc.next();
+
 			System.out.println("Enter the password that you want to use ");
 			String password = sc.next();
+			boolean isValid = isValidPassword(password);
+			while (!isValid) {
+				System.out.println(
+						"Password you entered doesn't satisfy the criteria.\n It contains at least 4 characters and at most 10 characters.\r\n"
+								+ "It contains at least one digit.\r\n"
+								+ "It contains at least one upper case alphabet.\r\n"
+								+ "It contains at least one lower case alphabet.\r\n"
+								+ "It contains at least one special character which includes !@#$%&*()-+=^.\r\n"
+								+ "It doesn’t contain any white space.\r\n");
+				System.out.println("Please enter the password that you want to use");
+				password = sc.next();
+				isValid = isValidPassword(password);
+			}
 			System.out.println("Enter your Name ");
 			String fullName = sc.next();
 			System.out.println("Enter your Email Adress ");
 			String email = sc.next();
+			boolean isEmailValid = isValidEmail(email);
+			while (!isEmailValid) {
+				System.out.println(
+						"Email you entered didn't satisfy the criteria. It contains a local part, the at-sign (@), and a domain name(ex:abc@gmail.com): ");
+				System.out.println("Enter your Email Adress ");
+				email = sc.next();
+				isEmailValid = isValidEmail(email);
+
+			}
 			System.out.println("Enter your phone number");
 			int phoneNumber = sc.nextInt();
-			UserProfile profile2 = new UserProfile(userName, password, fullName, email,phoneNumber);
+			UserProfile profile2 = new UserProfile(userName, password, fullName, email, phoneNumber);
 			registerUser(profile2);
 			System.out.println("Thank you for registering!!!");
 			System.out.println("Please log in to continue using the application!!!");
@@ -59,14 +84,24 @@ public class LoginCredentials {
 			enteredUserName = sc.next();
 			System.out.println("Enter your Password: ");
 			enteredPassword = sc.next();
-			for (int i = 0; i < userProfile1.length; i++) {
+			if (userProfile1[0] == null) {
+				System.out.println("No user found!!!\nPlease register to continue: ");
+				signUpApplication();
+				break;
+			} else {
+				try {
+					for (int i = 0; i < userProfile1.length; i++) {
 
-				if (userProfile1[i].getUserName().equalsIgnoreCase(enteredUserName)
-						&& (userProfile1[i].getPassword()).equals(enteredPassword)) {
-					isValid = true;
-					System.out.println(userProfile1[i].getFullName() + " is logged into the application");
-					loggedInAccount[0] = userProfile1[i];
-					return isValid;
+						if (userProfile1[i].getUserName().equalsIgnoreCase(enteredUserName)
+								&& (userProfile1[i].getPassword()).equals(enteredPassword)) {
+							isValid = true;
+							System.out.println(userProfile1[i].getFullName() + " is logged into the application");
+							loggedInAccount[0] = userProfile1[i];
+							return isValid;
+						}
+					}
+				} catch (NullPointerException e) {
+					System.out.println("User profile is not found");
 				}
 			}
 			loginAttempt--;
@@ -157,4 +192,21 @@ public class LoginCredentials {
 
 	}
 
+	public static boolean isValidPassword(String password) {
+		String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,10}$";
+		Pattern p = Pattern.compile(regex);
+		if (password == null) {
+			return false;
+		}
+		Matcher m = p.matcher(password);
+		return m.matches();
+	}
+
+	public static boolean isValidEmail(String email) {
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,10}$";
+		Pattern pat = Pattern.compile(emailRegex);
+		if (email == null)
+			return false;
+		return pat.matcher(email).matches();
+	}
 }

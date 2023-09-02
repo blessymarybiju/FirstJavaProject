@@ -1,13 +1,13 @@
 package cruiseCompany;
 
-public class Cruise  {
+public class Cruise {
 	private String cruiseName;
 	private String departurePort;
 	private String destination;
 	private String returnPort;
 
 	public Cruise(String cruiseName, String departurePort, String destination, String returnPort) {
-		
+
 		this.cruiseName = cruiseName;
 		this.departurePort = departurePort;
 		this.destination = destination;

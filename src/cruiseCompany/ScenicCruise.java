@@ -7,7 +7,7 @@ public class ScenicCruise extends Cruise implements CruiseCompany {
 	CruiseDetails details = new CruiseDetails();
 	String option1;
 	private double adultTicketPrice = 43.99, kidTicketPrice = 12.99, total = 0, adultBuffet = 20.99, kidBuffet = 4.99,
-			hst, finalPrice, adultBuffetPrice = 0, kidBuffetPrice = 0;
+			hst, finalPrice, adultBuffetPrice = 0, kidBuffetPrice = 0, hstpercentage = 0.15;
 	private int numOfDays = 3, spaRate, spot;
 
 	public ScenicCruise(String cruiseName, String departurePort, String destination, String returnPort) {
@@ -26,6 +26,12 @@ public class ScenicCruise extends Cruise implements CruiseCompany {
 
 	@Override
 	public double calculateCruisePrice(int numOfAdult, int childrenAbove5) {
+		if (childrenAbove5 == 0) {
+			kidBuffet = 0;
+		}
+		if (numOfAdult == 0) {
+			adultBuffet = 0;
+		}
 		System.out.println("All our cruises have food service on board. Do you want to pre-book for dinner buffet meals"
 				+ " at 20.99 per day for adults and 4.99 per day for kids?(enter yes to pre-book)");
 		var choice = sc.next().toLowerCase();
@@ -33,22 +39,24 @@ public class ScenicCruise extends Cruise implements CruiseCompany {
 				"Do you like to prebook for spa at a pre-booking rate of $50/ person(enter yes to pre-book): ");
 		var option = sc.next().toLowerCase();
 		spaRate = option.equals("yes") ? 50 : 0;
-		do {
-			System.out.println("How many spots you like to book: ");
-			spot = sc.nextInt();
-			if (spot > (numOfAdult + childrenAbove5)) {
-				System.out.println("The number of ticket you booked was " + (numOfAdult + childrenAbove5)
-						+ ", but you entered " + spot
-						+ "spots. Do you want to continue with the pre-booking(enter yes to continue, no to re enter):");
-				option1 = sc.next().toLowerCase();
-				if (option1.equals("yes")) {
+		if (option.equals("yes")) {
+			do {
+				System.out.println("How many spots you like to book: ");
+				spot = sc.nextInt();
+				if (spot > (numOfAdult + childrenAbove5)) {
+					System.out.println("The number of ticket you booked was " + (numOfAdult + childrenAbove5)
+							+ ", but you entered " + spot
+							+ "spots. Do you want to continue with the pre-booking(enter yes to continue, no to re enter):");
+					option1 = sc.next().toLowerCase();
+					if (option1.equals("yes")) {
+						spaRate = spaRate * spot;
+					}
+				} else {
 					spaRate = spaRate * spot;
+					option1 = "yes";
 				}
-			} else {
-				spaRate = spaRate * spot;
-				option1 = "yes";
-			}
-		} while (!option1.equals("yes"));
+			} while (!option1.equals("yes"));
+		}
 
 		System.out.println("Your Package includes ");
 		double adultTicket = adultTicketPrice * numOfAdult * numOfDays;
@@ -69,7 +77,7 @@ public class ScenicCruise extends Cruise implements CruiseCompany {
 
 		total = adultBuffetPrice + adultTicket + kidTicket + kidBuffetPrice + spaRate;
 		System.out.println("Total Price\t\t\t\t\t: $" + total);
-		hst = total * 0.15;
+		hst = total * hstpercentage;
 		finalPrice = total + hst;
 		System.out.println("HST @ 15%\t\t\t\t\t: $" + hst);
 		System.out.println("Final Price\t\t\t\t\t: $" + finalPrice);

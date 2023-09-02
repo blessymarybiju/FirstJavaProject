@@ -1,20 +1,21 @@
 package cruiseCompany;
 
 public class UserProfile {
-	private String userName, password, fullName,email;
+	private String userName, password, fullName, email;
 	private int phoneNumber;
 
 	public UserProfile(String userName, String password, String fullName, String email, int phoneNumber) {
-		this.userName=userName;
-		this.password=password;
-		this.fullName=fullName;
-		this.email=email;
-		this.setPhoneNumber(phoneNumber);
+		this.userName = userName;
+		this.password = password;
+		this.fullName = fullName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getFullName() {
 		return fullName;
 	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -47,5 +48,4 @@ public class UserProfile {
 		this.email = email;
 	}
 
-	
 }

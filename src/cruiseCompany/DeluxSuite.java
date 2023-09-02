@@ -18,19 +18,19 @@ public class DeluxSuite extends Hotel implements HotelStay {
 		System.out.println("Enter the number of days of stay: ");
 		daysOfStay = sc.nextInt();
 		System.out.println("\n\nThe total amount you will be charged is ");
-		System.out.println("Delux Suite \t\t@ " + daysOfStay + "nights \t:" + (roomRate * daysOfStay));
+		System.out.println("Delux Suite\t\t\t\t@" + daysOfStay + "nights:" + (roomRate * daysOfStay));
 		if (choice.equals("yes")) {
 			adultLunchTotal = numOfAdult * adultLunchRate;
 			kidsLunchTotal = numOfKid * kidLunchRate;
-			System.out.println("Lunch Pre-Booked Special Rate Adults @ " + numOfAdult + " :" + adultLunchTotal);
-			System.out.println("Lunch Pre-Booked Special Rate Children @ " + numOfKid + " :" + kidsLunchTotal);
+			System.out.println("Lunch Pre-Booked Special Rate Adults   @" + numOfAdult + "\t :" + adultLunchTotal);
+			System.out.println("Lunch Pre-Booked Special Rate Children @" + numOfKid + "\t :" + kidsLunchTotal);
 		}
 		total=(roomRate * daysOfStay)+adultLunchTotal+kidsLunchTotal;
-		System.out.println("Total Price\t\t\t\t\t: $" + total);
+		System.out.println("Total Price\t\t\t\t\t : $" + total);
 		hst = total * hstpercentage;
 		finalAmount = total + hst;
-		System.out.println("HST @ 18%\t\t\t\t\t: $" + hst);
-		System.out.println("Final Price\t\t\t\t\t: $" + finalAmount);
+		System.out.println("HST @ 18%\t\t\t\t\t : $" + hst);
+		System.out.println("Final Price\t\t\t\t\t : $" + finalAmount);
 
 	}
 

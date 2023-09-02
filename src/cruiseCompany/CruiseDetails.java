@@ -4,11 +4,14 @@ import java.util.Scanner;
 
 public class CruiseDetails {
 	Scanner sc = new Scanner(System.in);
-	String returnPort, destination, dearturePort;
+	public String returnPort, destination, dearturePort;
 	CruiseCompany cruise;
-	int childrenAbove5 = 0, age, numOfAdult;
+	private int childrenAbove5 = 0, age, numOfAdult;
 
 	public void displayCruisePackage() {
+		System.out.println(
+				"-------------------------------------------------------------------------------------------------\n\n");
+		System.out.println("Welcome to Cruise Booking.\n");
 		System.out.println(
 				"We offer 4 different packages as displayed below. Please enter the cruise that you want to select:");
 		System.out.println(
@@ -62,7 +65,7 @@ public class CruiseDetails {
 				}
 			}
 		}
-		cruise.calculateCruisePrice(numOfAdult,childrenAbove5);
+		cruise.calculateCruisePrice(numOfAdult, childrenAbove5);
 	}
 
 }
